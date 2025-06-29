@@ -1,0 +1,20 @@
+{
+  "name": "Link Hopper",
+  "description": "Seamlessly copy links  from your browser to your smartphone",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["tabs"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "./assets/icon16.png",
+      "48": "./assets/icon48.png",
+      "128": "./assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "./assets/icon16.png",
+    "48": "./assets/icon48.png",
+    "128": "./assets/icon128.png"
+  }
+}

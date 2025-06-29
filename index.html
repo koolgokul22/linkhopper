@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Hopper</title>
+    <script type="text/javascript" src="./qr-scanner.js"></script>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header"></div>
+      <div class="card-body">
+        <div class="title-container">
+          <img alt="" class="url-favicon" height="40px" width="40px" />
+          <h2 id="qr-title"></h2>
+        </div>
+        <div class="qr-container"></div>
+        <input disabled class="card-url" />
+      </div>
+      <div class="card-footer">
+        <div class="action-buttons-container">
+          <button id="copy-btn">Copy</button>
+          <button id="download-btn">Download</button>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
