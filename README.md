@@ -1,4 +1,4 @@
-# linkhopper
+# Link Hopper
 
 A chrome extension to share URLs
 
