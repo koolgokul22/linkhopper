@@ -1,20 +1,28 @@
 {
   "name": "Link Hopper",
-  "description": "Seamlessly copy links  from your browser to your smartphone",
-  "version": "1.0",
+  "description": "Seamlessly copy links from your browser to your smartphone — instant QR codes, one scan away.",
+  "version": "1.1",
   "manifest_version": 3,
-  "permissions": ["tabs"],
+  "permissions": ["activeTab"],
   "action": {
     "default_popup": "index.html",
     "default_icon": {
-      "16": "./assets/icon16.png",
-      "48": "./assets/icon48.png",
-      "128": "./assets/icon128.png"
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
     }
   },
   "icons": {
-    "16": "./assets/icon16.png",
-    "48": "./assets/icon48.png",
-    "128": "./assets/icon128.png"
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "Open Link Hopper"
+    }
   }
 }
