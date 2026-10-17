@@ -4,27 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Link Hopper</title>
-    <script type="text/javascript" src="./qr-scanner.js"></script>
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div class="card">
-      <div class="card-header"></div>
-      <div class="card-body">
-        <div class="title-container">
-          <img alt="" class="url-favicon" height="40px" width="40px" />
-          <h2 id="qr-title"></h2>
+    <!-- Toast notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div class="popup-container">
+      <!-- Header -->
+      <div class="popup-header">
+        <div class="brand">
+          <img id="url-favicon" class="url-favicon" alt="" width="22" height="22" />
+          <span id="site-name" class="site-name"></span>
         </div>
-        <div class="qr-container"></div>
-        <input disabled class="card-url" />
+        <button id="theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">
+          <!-- Icon injected by JS -->
+        </button>
       </div>
-      <div class="card-footer">
-        <div class="action-buttons-container">
-          <button id="copy-btn">Copy</button>
-          <button id="download-btn">Download</button>
+
+      <!-- Normal content (hidden when error state is active) -->
+      <div id="normal-content">
+        <!-- QR Code -->
+        <div class="qr-section">
+          <div class="qr-wrapper">
+            <div id="qr-container" class="qr-container"></div>
+          </div>
         </div>
+
+        <!-- Page info -->
+        <div class="page-info">
+          <p id="page-title" class="page-title" title=""></p>
+          <input id="url-display" class="url-display" readonly />
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button id="copy-btn" class="action-btn" title="Copy URL" aria-label="Copy URL">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span>Copy</span>
+          </button>
+          <button id="download-btn" class="action-btn" title="Download QR code" aria-label="Download QR code">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Download</span>
+          </button>
+          <button id="share-btn" class="action-btn" title="Share URL" aria-label="Share URL">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            <span>Share</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error state (hidden by default) -->
+      <div id="error-state" class="error-state hidden">
+        <svg class="error-icon" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <p class="error-title">Can't generate QR code</p>
+        <p class="error-subtitle">This page type isn't supported.<br/>Try navigating to a regular webpage.</p>
       </div>
     </div>
-    <script src="index.js"></script>
+
+    <script src="./qr-code-styling.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>

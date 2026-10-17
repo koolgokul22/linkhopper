@@ -1,103 +1,503 @@
+/* ==========================================================
+   Link Hopper — Modern Glassmorphism Theme
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. CSS Custom Properties (Light & Dark Themes)
+   ---------------------------------------------------------- */
+:root {
+  /* Background gradient */
+  --bg-start: #3a5da8;
+  --bg-mid: #4e7ad6;
+  --bg-end: #7aa2ec;
+
+  /* Glass card */
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(255, 255, 255, 0.45);
+  --card-shadow: rgba(0, 0, 0, 0.10);
+
+  /* Text */
+  --text-primary: #1a1f36;
+  --text-secondary: #4a5275;
+  --text-muted: #7a82a0;
+
+  /* Accent (brand blue) */
+  --accent: #4267b2;
+  --accent-hover: #365899;
+  --accent-subtle: rgba(66, 103, 178, 0.10);
+
+  /* Buttons */
+  --btn-bg: rgba(66, 103, 178, 0.10);
+  --btn-bg-hover: rgba(66, 103, 178, 0.18);
+  --btn-text: #4267b2;
+
+  /* QR "paper" */
+  --qr-bg: #ffffff;
+  --qr-shadow: rgba(0, 0, 0, 0.06);
+  --qr-dots: #4267b2;
+
+  /* Input */
+  --input-bg: rgba(66, 103, 178, 0.06);
+  --input-border: rgba(66, 103, 178, 0.15);
+  --input-text: #4a5275;
+
+  /* Toast */
+  --toast-bg: #1a1f36;
+  --toast-text: #ffffff;
+
+  /* Error */
+  --error-icon: #b0bbd5;
+  --error-title: #4a5275;
+  --error-subtitle: #7a82a0;
+
+  /* Misc */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 50px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --bg-start: #0c1222;
+  --bg-mid: #152042;
+  --bg-end: #1e3268;
+
+  --card-bg: rgba(22, 33, 65, 0.72);
+  --card-border: rgba(255, 255, 255, 0.07);
+  --card-shadow: rgba(0, 0, 0, 0.30);
+
+  --text-primary: #e4e9f5;
+  --text-secondary: #a3b1d0;
+  --text-muted: #6a7ba3;
+
+  --accent: #6a8fd8;
+  --accent-hover: #89a9e8;
+  --accent-subtle: rgba(106, 143, 216, 0.12);
+
+  --btn-bg: rgba(106, 143, 216, 0.12);
+  --btn-bg-hover: rgba(106, 143, 216, 0.22);
+  --btn-text: #89a9e8;
+
+  --qr-bg: #f0f2f8;
+  --qr-shadow: rgba(0, 0, 0, 0.12);
+  --qr-dots: #4267b2;
+
+  --input-bg: rgba(106, 143, 216, 0.08);
+  --input-border: rgba(106, 143, 216, 0.15);
+  --input-text: #a3b1d0;
+
+  --toast-bg: #e4e9f5;
+  --toast-text: #1a1f36;
+
+  --error-icon: #6a7ba3;
+  --error-title: #a3b1d0;
+  --error-subtitle: #6a7ba3;
+}
+
+/* ----------------------------------------------------------
+   2. Base & Reset
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
-  background-color: #4267b2;
-  border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
 }
 
-.card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: auto;
-  margin: 20px auto;
+body {
+  width: 380px;
+  padding: 14px;
+  background: linear-gradient(145deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+  min-height: 100px;
+  transition: background var(--transition-normal);
+}
+
+/* ----------------------------------------------------------
+   3. Animations
+   ---------------------------------------------------------- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes qrScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+}
+
+/* ----------------------------------------------------------
+   4. Glass Card (Popup Container)
+   ---------------------------------------------------------- */
+.popup-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px var(--card-shadow);
+  padding: 20px;
+  position: relative;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  animation: slideUp 0.35s ease both;
+  transition: background var(--transition-normal), border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
 }
 
-.card-url {
-  text-align: center;
-  font-size: 0.85rem;
-  padding: 5px;
-  max-width: 275px;
-  word-wrap: break-word;
+/* Subtle top highlight for glass effect */
+.popup-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
 }
 
-input.card-url {
-  width: 100%;
-  height: 25px;
-  border-radius: 10px;
-  margin-bottom: 5px;
-}
-
-.card-body {
-  color: #555;
-  font-size: 1rem;
-  line-height: 1.6;
-  text-align: center;
-}
-
-.card-footer {
+/* ----------------------------------------------------------
+   5. Header
+   ---------------------------------------------------------- */
+.popup-header {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: 8px;
-  border-radius: 3px;
-  padding: 2px 3px;
-}
-
-.card-header {
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 0px 15px;
-  margin-top: 10px;
+  margin-bottom: 16px;
 }
 
-.action-buttons-container {
+.brand {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
-#qr-title {
-  margin: 2px;
+.url-favicon {
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: var(--accent-subtle);
 }
 
-.title-container {
+.site-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+}
+
+/* Icon button (theme toggle) */
+.icon-btn {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  border-radius: 18px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border: none;
-  background-color: #4267b2;
-  color: white;
-  font-size: 16px;
+  border-radius: 50%;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s eases, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
-button:hover {
-  background-color: #365899;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.icon-btn:hover {
+  background: var(--btn-bg-hover);
+  transform: scale(1.08);
 }
 
-button:active {
-  background-color: #2a4887;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.icon-btn:active {
+  transform: scale(0.95);
 }
 
-button:focus {
+.icon-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   6. QR Code Section
+   ---------------------------------------------------------- */
+.qr-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+  animation: qrScaleIn 0.4s ease 0.1s both;
+}
+
+.qr-wrapper {
+  background: var(--qr-bg);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: 0 2px 16px var(--qr-shadow);
+  display: inline-flex;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.qr-container canvas {
+  border-radius: 8px;
+}
+
+/* ----------------------------------------------------------
+   7. Page Info
+   ---------------------------------------------------------- */
+.page-info {
+  text-align: center;
+  margin-bottom: 16px;
+  animation: fadeIn 0.35s ease 0.15s both;
+}
+
+.page-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  transition: color var(--transition-fast);
+}
+
+.url-display {
+  width: 100%;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  color: var(--input-text);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  text-align: center;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 103, 178, 0.5);
+  cursor: text;
+  transition: background var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.url-display:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+/* ----------------------------------------------------------
+   8. Action Buttons
+   ---------------------------------------------------------- */
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  animation: fadeIn 0.35s ease 0.2s both;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  box-shadow: none;
+}
+
+.action-btn svg {
+  flex-shrink: 0;
+}
+
+.action-btn:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--card-shadow);
+}
+
+.action-btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+.action-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   9. Toast Notification
+   ---------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--toast-text);
+  background: var(--toast-bg);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition: none;
+  white-space: nowrap;
+}
+
+.toast.visible {
+  animation: toastIn 0.25s ease forwards;
+}
+
+.toast.hiding {
+  animation: toastOut 0.25s ease forwards;
+}
+
+.toast-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ----------------------------------------------------------
+   10. Error State
+   ---------------------------------------------------------- */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  animation: fadeIn 0.4s ease both;
+}
+
+.error-state.hidden {
+  display: none;
+}
+
+.error-icon {
+  color: var(--error-icon);
+  margin-bottom: 14px;
+  transition: color var(--transition-fast);
+}
+
+.error-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--error-title);
+  margin-bottom: 6px;
+  transition: color var(--transition-fast);
+}
+
+.error-subtitle {
+  font-size: 0.82rem;
+  color: var(--error-subtitle);
+  line-height: 1.5;
+  transition: color var(--transition-fast);
+}
+
+/* ----------------------------------------------------------
+   11. Utility
+   ---------------------------------------------------------- */
+.hidden {
+  display: none !important;
+}
+
+/* ----------------------------------------------------------
+   12. Accessibility — Reduced Motion
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   13. Scrollbar
+   ---------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
 }
