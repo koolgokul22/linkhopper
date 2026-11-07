@@ -1,10 +1,14 @@
 {
   "name": "link-hopper",
-  "version": "1.0.0",
+  "version": "1.2.0",
+  "private": true,
   "description": "A simple link sharing chrome extension",
-  "main": "index.js",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/*.test.js",
+    "package": "node scripts/package.mjs"
   },
   "keywords": [
     "link-sharing",
@@ -13,5 +17,7 @@
   ],
   "author": "Gokul Kumar R",
   "license": "ISC",
-  "dependencies": {}
+  "devDependencies": {
+    "jsdom": "^31.0.0"
+  }
 }

@@ -15,6 +15,7 @@
       <div class="popup-header">
         <div class="brand">
           <img id="url-favicon" class="url-favicon" alt="" width="22" height="22" />
+          <span id="url-favicon-fallback" class="url-favicon-fallback hidden" aria-hidden="true"></span>
           <span id="site-name" class="site-name"></span>
         </div>
         <button id="theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">
@@ -30,6 +31,7 @@
             <div id="qr-container" class="qr-container"></div>
           </div>
         </div>
+        <p id="qr-warning" class="qr-warning hidden" role="alert"></p>
 
         <!-- Page info -->
         <div class="page-info">
@@ -54,7 +56,7 @@
             </svg>
             <span>Download</span>
           </button>
-          <button id="share-btn" class="action-btn" title="Share URL" aria-label="Share URL">
+          <button id="share-btn" class="action-btn" title="Share link" aria-label="Share link">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3"/>
               <circle cx="6" cy="12" r="3"/>
@@ -75,11 +77,13 @@
           <line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
         <p class="error-title">Can't generate QR code</p>
-        <p class="error-subtitle">This page type isn't supported.<br/>Try navigating to a regular webpage.</p>
+        <p id="error-subtitle" class="error-subtitle">This page type isn't supported.<br/>Try navigating to a regular webpage.</p>
       </div>
     </div>
 
-    <script src="./qr-code-styling.js"></script>
+    <script src="../vendor/qr-code-styling.js"></script>
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/card.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>
