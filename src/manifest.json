@@ -1,11 +1,11 @@
 {
   "name": "Link Hopper",
   "description": "Seamlessly copy links from your browser to your smartphone — instant QR codes, one scan away.",
-  "version": "1.1",
+  "version": "1.2.0",
   "manifest_version": 3,
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "favicon", "storage"],
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup/index.html",
     "default_icon": {
       "16": "assets/icon16.png",
       "48": "assets/icon48.png",
