@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload extension zip
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: link-hopper-extension
           path: dist/*.zip
