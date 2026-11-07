@@ -1,0 +1,61 @@
+name: Bug report
+description: Something is not working as expected
+labels: [bug]
+body:
+  - type: input
+    id: extension-version
+    attributes:
+      label: Link Hopper version
+      description: Shown on chrome://extensions
+      placeholder: "1.2"
+    validations:
+      required: true
+  - type: input
+    id: chrome-version
+    attributes:
+      label: Chrome version
+      description: From chrome://version
+      placeholder: "130.0.6723.92"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - ChromeOS
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: url-type
+    attributes:
+      label: Type of URL / page
+      description: For example a normal https page, a very long URL, a local file, chrome:// page, PDF.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Click ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include screenshots or console errors if you can.
+    validations:
+      required: true
